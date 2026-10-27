@@ -73,11 +73,11 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 
 In `App.js`:
 
-- [ ] Wrap the app in `NavigationContainer`
-- [ ] Create a bottom tab navigator with two tabs: **Draw** and **Saved**
-- [ ] The Draw tab shows `DrawScreen`
-- [ ] Give each tab an icon (hint: `Ionicons` from `@expo/vector-icons`, e.g. `shapes-outline` and `albums-outline`)
-- [ ] Remove the temporary header and `SafeAreaView` (the tab navigator handles these)
+- [x] Wrap the app in `NavigationContainer`
+- [x] Create a bottom tab navigator with two tabs: **Draw** and **Saved**
+- [x] The Draw tab shows `DrawScreen`
+- [x] Give each tab an icon (hint: `Ionicons` from `@expo/vector-icons`, e.g. `shapes-outline` and `albums-outline`)
+- [x] Remove the temporary header and `SafeAreaView` (the tab navigator handles these)
 
 ## Task 2: Stack navigation inside the Saved tab
 
@@ -85,13 +85,13 @@ In `App.js`:
 npm install @react-navigation/native-stack
 ```
 
-- [ ] Create a stack navigator (e.g. in `src/navigation/SavedStack.js`) with two screens:
+- [x] Create a stack navigator (e.g. in `src/navigation/SavedStack.js`) with two screens:
   `SavedList` → `SavedScreen` and `DesignDetail` → `DesignDetailScreen`
-- [ ] Use this stack as the component of the **Saved** tab
-- [ ] Hide the tab's own header for the Saved tab (`headerShown: false`) so you don't get two headers
-- [ ] In `SavedScreen`, tapping a card navigates to `DesignDetail` and passes `{ designId }` as a route param
-- [ ] In `DesignDetailScreen`, read `designId` from `route.params`
-- [ ] After deleting, go back to the list with `navigation.goBack()`
+- [x] Use this stack as the component of the **Saved** tab
+- [x] Hide the tab's own header for the Saved tab (`headerShown: false`) so you don't get two headers
+- [x] In `SavedScreen`, tapping a card navigates to `DesignDetail` and passes `{ designId }` as a route param
+- [x] In `DesignDetailScreen`, read `designId` from `route.params`
+- [x] After deleting, go back to the list with `navigation.goBack()`
 
 ## Task 3: Save designs with AsyncStorage
 

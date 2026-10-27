@@ -15,6 +15,7 @@ export default function SavedScreen({ navigation }) {
   const openDesign = (design) => {
     // TODO (Task 2): Navigate to the "DesignDetail" screen
     // and pass the design's id as a route param.
+    navigation.navigate('DesignDetail', { route: design.id });
   };
 
   return (

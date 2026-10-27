@@ -11,12 +11,15 @@ export default function DesignDetailScreen({ route, navigation }) {
 
   useEffect(() => {
     // TODO (Task 2): Read the design id from route.params.
+    let designId = route.params.route;
+
     // TODO (Task 3): Load that design with getDesignById(id) and store it with setDesign.
   }, []);
 
   const handleDelete = async () => {
     // TODO (Task 3): Delete the design with deleteDesign(id).
     // TODO (Task 2): Then go back to the Saved list.
+    navigation.goBack();
   };
 
   if (!design) {
