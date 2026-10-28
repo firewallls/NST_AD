@@ -7,6 +7,7 @@ import { COLORS } from './src/constants/theme';
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import SavedStackNavigator from './src/navigation/SavedStack';
 
 //Done TODO (Task 1): Replace this with React Navigation.
 //   - Wrap the app in <NavigationContainer>.
@@ -30,7 +31,7 @@ export default function App() {
     <NavigationContainer>
       <TAB.Navigator>
         <TAB.Screen name="Draw" component={DrawScreen} options={{ tabBarIcon: drawIcon }} />
-        <TAB.Screen name="Saved" component={SavedScreen} options={{ tabBarIcon: savedIcon , headerShown: false }} />
+        <TAB.Screen name="Saved" component={SavedStackNavigator} options={{ tabBarIcon: savedIcon , headerShown: false }} />
       </TAB.Navigator>
     </NavigationContainer>
   );

@@ -1,31 +1,65 @@
-import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
-import DesignPreview from '../components/DesignPreview';
-import { formatDate } from '../components/DesignCard';
-import { COLORS, SHAPES, SHAPE_TYPES } from '../constants/theme';
+import { useEffect, useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import DesignPreview from "../components/DesignPreview";
+import { formatDate } from "../components/DesignCard";
+import { COLORS, SHAPES, SHAPE_TYPES } from "../constants/theme";
+import { deleteDesign, getDesignById } from "../storage/designStorage";
 
 // Shows one saved design. This is the second screen of the "Saved" tab's stack.
 export default function DesignDetailScreen({ route, navigation }) {
   const [design, setDesign] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { width } = useWindowDimensions();
+  const designId = route.params?.designId;
 
   useEffect(() => {
-    // TODO (Task 2): Read the design id from route.params.
-    let designId = route.params.route;
+    let isActive = true;
 
-    // TODO (Task 3): Load that design with getDesignById(id) and store it with setDesign.
-  }, []);
+    const loadDesign = async () => {
+      if (!designId) {
+        setDesign(null);
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(true);
+      const loadedDesign = await getDesignById(designId);
+      if (isActive) {
+        setDesign(loadedDesign);
+        setIsLoading(false);
+      }
+    };
+
+    loadDesign();
+    return () => {
+      isActive = false;
+    };
+  }, [designId]);
 
   const handleDelete = async () => {
-    // TODO (Task 3): Delete the design with deleteDesign(id).
-    // TODO (Task 2): Then go back to the Saved list.
+    await deleteDesign(designId);
     navigation.goBack();
   };
+
+  if (isLoading) {
+    return (
+      <View style={[styles.screen, styles.center]}>
+        <Text style={styles.muted}>Loading design…</Text>
+      </View>
+    );
+  }
 
   if (!design) {
     return (
       <View style={[styles.screen, styles.center]}>
-        <Text style={styles.muted}>Loading design…</Text>
+        <Text style={styles.muted}>Design not found.</Text>
       </View>
     );
   }
@@ -39,9 +73,12 @@ export default function DesignDetailScreen({ route, navigation }) {
       <View style={styles.stats}>
         {SHAPE_TYPES.map((type) => (
           <View key={type} style={styles.stat}>
-            <View style={[styles.dot, { backgroundColor: SHAPES[type].color }]} />
+            <View
+              style={[styles.dot, { backgroundColor: SHAPES[type].color }]}
+            />
             <Text style={styles.statText}>
-              {design.shapes.filter((s) => s.type === type).length} {SHAPES[type].label}
+              {design?.shapes?.filter((s) => s.type === type).length || 0}{" "}
+              {SHAPES[type].label}
             </Text>
           </View>
         ))}
@@ -60,31 +97,31 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   center: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   content: {
     padding: 16,
     gap: 16,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: COLORS.ink,
   },
   muted: {
     color: COLORS.muted,
   },
   stats: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 16,
   },
   stat: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 6,
   },
   dot: {
@@ -97,8 +134,8 @@ const styles = StyleSheet.create({
     color: COLORS.ink,
   },
   delete: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
+    alignSelf: "stretch",
+    alignItems: "center",
     paddingVertical: 12,
     borderRadius: 12,
     borderWidth: 1,
@@ -106,6 +143,6 @@ const styles = StyleSheet.create({
   },
   deleteText: {
     color: COLORS.danger,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });

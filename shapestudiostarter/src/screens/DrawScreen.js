@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import DraggableShape from '../components/DraggableShape';
 import ShapePalette from '../components/ShapePalette';
 import { COLORS, SHAPES } from '../constants/theme';
+import { saveDesign } from '../storage/designStorage'; 
 // TODO (Task 3): import { saveDesign } from '../storage/designStorage';
 
 export default function DrawScreen() {
@@ -61,8 +62,9 @@ export default function DrawScreen() {
 
     // TODO (Task 3): Save the design with saveDesign(design),
     // then clear the canvas and show 'Saved to your designs'.
-    console.log('Design to save:', JSON.stringify(design));
-    showMessage('Saving is not built yet (Task 3)');
+    saveDesign(design);
+    setShapes([]);
+    showMessage("Saved to your designs.");
   };
 
   return (

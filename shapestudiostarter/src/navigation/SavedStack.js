@@ -2,18 +2,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SavedScreen from '../screens/SavedScreen';
 import DesignDetailScreen from '../screens/DesignDetailScreen';
 
+let stack = createNativeStackNavigator();
+
 export default function SavedStackNavigator() {
   return (
-      <createNativeStackNavigator.Navigator>
-        <createNativeStackNavigator.Screen
+      <stack.Navigator>
+        <stack.Screen
           name="SavedList"
           component={SavedScreen}
         />
-        <createNativeStackNavigator.Screen
+        <stack.Screen
           name="DesignDetail"
           component={DesignDetailScreen}
         />
-      </createNativeStackNavigator.Navigator>
+      </stack.Navigator>
   );
 }
 

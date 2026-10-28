@@ -99,12 +99,12 @@ npm install @react-navigation/native-stack
 npm install @react-native-async-storage/async-storage
 ```
 
-- [ ] Implement the four functions in `src/storage/designStorage.js`:
+- [x] Implement the four functions in `src/storage/designStorage.js`:
   `getDesigns`, `saveDesign`, `getDesignById`, `deleteDesign`
-- [ ] Store all designs as **one JSON array** under one key (AsyncStorage only stores strings)
-- [ ] In `DrawScreen`, call `saveDesign(design)` when Save is tapped, then clear the canvas
-- [ ] In `SavedScreen`, load the list with `getDesigns()` **every time the tab is focused** (`useFocusEffect`)
-- [ ] In `DesignDetailScreen`, load the design with `getDesignById(designId)`
+- [x] Store all designs as **one JSON array** under one key (AsyncStorage only stores strings)
+- [x] In `DrawScreen`, call `saveDesign(design)` when Save is tapped, then clear the canvas
+- [x] In `SavedScreen`, load the list with `getDesigns()` **every time the tab is focused** (`useFocusEffect`)
+- [x] In `DesignDetailScreen`, load the design with `getDesignById(designId)`
 - [ ] The Delete button calls `deleteDesign(designId)`
 
 ### The design object
@@ -127,7 +127,7 @@ npm install @react-native-async-storage/async-storage
 
 ## Done when…
 
-- [ ] The app has two bottom tabs: Draw and Saved
+- [x] The app has two bottom tabs: Draw and Saved
 - [ ] Saving a design clears the canvas and the design appears on the Saved tab
 - [ ] Tapping a saved design opens it on its own screen with a working back button
 - [ ] Deleting a design removes it from the list
